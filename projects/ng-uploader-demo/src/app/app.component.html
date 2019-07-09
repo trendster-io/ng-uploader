@@ -1,0 +1,65 @@
+<h1 class="title">NgUploader Demo</h1>
+
+<section>
+    <h1>Options</h1>
+    <div class="options">
+        <div class="option">
+            <label for="autoUpload">Auto Upload</label>
+            <input type="checkbox" name="autoUpload" id="autoUpload" [(ngModel)]="autoUpload"
+                (ngModelChange)="onOptionsChange()" />
+        </div>
+        <div class="option">
+            <label for="removeAfterUpload">Remove After Upload</label>
+            <input type="checkbox" name="removeAfterUpload" id="removeAfterUpload" [(ngModel)]="removeAfterUpload"
+                (ngModelChange)="onOptionsChange()" />
+        </div>
+        <div class="option">
+            <label for="queueLimit">Queue Limit</label>
+            <input type="number" name="queueLimit" id="queueLimit" [(ngModel)]="queueLimit"
+                (ngModelChange)="onOptionsChange()" />
+        </div>
+        <div class="option">
+            <label for="concurrency">Concurrency</label>
+            <input type="number" name="concurrency" id="concurrency" [(ngModel)]="concurrency"
+                (ngModelChange)="onOptionsChange()" />
+        </div>
+        <div class="option">
+            <label for="maxFileSize">Max File Size(Bytes)</label>
+            <input type="number" name="maxFileSize" id="maxFileSize" [(ngModel)]="maxFileSize"
+                (ngModelChange)="onOptionsChange()" />
+        </div>
+        <div class="option option--column">
+            <label for="allowedMimeTypes">Allowed Mime Types</label>
+            <select name="allowedMimeTypes" id="allowedMimeTypes" multiple [(ngModel)]="allowedMimeTypes"
+                (ngModelChange)="onOptionsChange()">
+                <option value="image/png">image/png</option>
+                <option value="image/jpeg">image/jpeg</option>
+                <option value="image/gif">image/gif</option>
+                <option value="video/mp4">video/mp4</option>
+                <option value="application/pdf">application/pdf</option>
+            </select>
+        </div>
+    </div>
+</section>
+
+<section class="uploader">
+    <h1>Uploads</h1>
+    <div class="dropzone" dropzone (click)="fileInput.click()" (fileDrop)="onFilesDrop($event)">
+        Click or Drag and drop files here
+    </div>
+    Or
+    <input #fileInput type="file" name="file" id="file" multiple (click)="$event.target.value = null"
+        (change)="onFilesChange($event.target.files)">
+    <h1 *ngIf="uploader.isUploading">Total Uploader Progress: {{uploader.totalProgress}}</h1>
+    <div class="uploads">
+        <div class="upload" *ngFor="let item of uploader.items">
+            <p>{{item.fileName}}</p>
+            <img *ngIf="item.preview" class="preview" [src]="item.preview | async" alt="Upload Media Preview" />
+            <p *ngIf="item.isReady && !item.isUploading">Waiting for previous uploads to finish</p>
+            <p *ngIf="item.isUploading">Progress: {{item.progress}}</p>
+            <button *ngIf="!(item.isReady || item.isUploaded)" type="button" (click)="item.upload()">Upload</button>
+            <button *ngIf="item.isReady" type="button" (click)="item.cancel()">Cancel</button>
+            <button type="button" (click)="item.remove()">Remove</button>
+        </div>
+    </div>
+</section>

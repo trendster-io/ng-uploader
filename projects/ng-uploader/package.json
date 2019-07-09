@@ -1,0 +1,33 @@
+{
+  "name": "@trendster-io/ng-uploader",
+  "version": "1.0.0",
+  "description": "A fully featured Angular file uploader that utilizes Angular's HttpClient internally, allows you to customize outgoing HTTP requests using the \"Angular Way\" (Interceptors), provides customizable concurrent queuing of uploads and a simple way to select files via drag & drop.",
+  "author": "Omar Doma",
+  "license": "MIT",
+  "homepage": "https://github.com/trendster-io/ng-uploader#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trendster-io/ng-uploader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trendster-io/ng-uploader/issues"
+  },
+  "keywords": [
+    "Trendster",
+    "Angular",
+    "File Upload",
+    "Interceptor",
+    "HttpClient"
+  ],
+  "scripts": {
+    "build": "ng build ng-uploader",
+    "test": "ng test ng-uploader",
+    "start-api": "node ./projects/ng-uploader-demo/api/index",
+    "demo": "npm run start-api & ng serve ng-uploader-demo",
+    "release": "cd dist/ng-uploader && npm publish --access public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  }
+}
