@@ -5,7 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { UploadListener, UploadItemOptions } from './models';
 
 export class UploadItem {
-  readonly req: HttpRequest<FormData>;
   readonly preview: Observable<string>;
   readonly onResponse: Observable<any>;
   readonly onProgress: Observable<number>;
@@ -13,6 +12,7 @@ export class UploadItem {
   private onResponseSubject: Subject<any>;
   private onProgressSubject: Subject<number>;
   private onErrorSubject: Subject<HttpErrorResponse>;
+  private _req: HttpRequest<FormData>;
   private _progress: number;
   private url: string;
   private method: 'POST' | 'PUT' | 'PATCH';
@@ -38,11 +38,15 @@ export class UploadItem {
     this.file = options.file;
     this.fileAlias = options.fileAlias || 'file';
     this.additionalParams = options.additionalParams;
-    this.req = this.buildRequest();
+    this._req = this.buildRequest();
     const fileCategory = this.file.type.split('/')[0];
     if (fileCategory === 'image' || fileCategory === 'video') {
       this.preview = this.readMediaFile();
     }
+  }
+
+  get req(): HttpRequest<FormData> {
+    return this._req;
   }
 
   get progress(): number {
@@ -165,7 +169,11 @@ export class UploadItem {
     this.onErrorSubject.next(err);
   }
 
-  upload(): void {
+  upload(additionalParams?: { [key: string]: any }): void {
+    if (this.additionalParams) {
+      this.additionalParams = additionalParams;
+      this._req = this.buildRequest();
+    }
     this.listener.uploadItem(this);
   }
 

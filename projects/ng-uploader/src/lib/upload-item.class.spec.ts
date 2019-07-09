@@ -48,6 +48,13 @@ describe('UploadItem', () => {
     expect(req.body instanceof FormData).toBeTruthy();
   });
 
+  it('should rebuild the http request with the additionalParams passed in upload method', () => {
+    expect(uploadItem.req instanceof HttpRequest).toBeTruthy();
+    expect(uploadItem.req.body instanceof FormData).toBeTruthy();
+    uploadItem.upload({ foo: 'bar' });
+    expect(uploadItem.req.body.get('foo')).toBe('bar');
+  });
+
   it('should set the media preview for image/video files', () => {
     const { preview } = uploadItem;
     expect(preview).toBeTruthy();
