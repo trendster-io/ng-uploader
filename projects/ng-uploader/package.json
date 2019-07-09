@@ -19,13 +19,6 @@
     "Interceptor",
     "HttpClient"
   ],
-  "scripts": {
-    "build": "ng build ng-uploader",
-    "test": "ng test ng-uploader",
-    "start-api": "node ./projects/ng-uploader-demo/api/index",
-    "demo": "npm run start-api & ng serve ng-uploader-demo",
-    "release": "cd dist/ng-uploader && npm publish --access public"
-  },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"

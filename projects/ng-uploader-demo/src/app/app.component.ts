@@ -53,7 +53,10 @@ export class AppComponent implements OnInit {
     files.forEach(file => {
       try {
         const item = this.uploader.addItem({
-          file
+          file,
+          additionalParams: {
+            foo: 'bar'
+          }
         });
       } catch (err) {
         console.log(err);

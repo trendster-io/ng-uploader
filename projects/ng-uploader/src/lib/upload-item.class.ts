@@ -18,7 +18,7 @@ export class UploadItem {
   private method: 'POST' | 'PUT' | 'PATCH';
   private file: File;
   private fileAlias: string;
-  private additionalParams: object;
+  private additionalParams: { [key: string]: any };
   private ready: boolean;
   private uploading: boolean;
   private uploaded: boolean;
@@ -105,7 +105,6 @@ export class UploadItem {
       reader.onerror = () => {
         reader.abort();
         observer.error(reader.error);
-        observer.complete();
       };
       reader.readAsDataURL(this.file);
     });
@@ -170,7 +169,7 @@ export class UploadItem {
   }
 
   upload(additionalParams?: { [key: string]: any }): void {
-    if (this.additionalParams) {
+    if (additionalParams) {
       this.additionalParams = additionalParams;
       this._req = this.buildRequest();
     }
