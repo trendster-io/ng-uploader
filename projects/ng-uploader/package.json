@@ -1,6 +1,6 @@
 {
   "name": "@trendster-io/ng-uploader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A fully featured Angular file uploader that utilizes Angular's HttpClient internally, allows you to customize outgoing HTTP requests using the \"Angular Way\" (Interceptors), provides customizable concurrent queuing of uploads and a simple way to select files via drag & drop.",
   "author": "Omar Doma",
   "license": "MIT",
