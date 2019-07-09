@@ -1,3 +1,9 @@
+<a name="1.0.3"></a>
+
+# 1.0.3 (2019-07-09)
+
+A critical hotfix for overriding additionalParams.
+
 <a name="1.0.2"></a>
 
 # 1.0.2 (2019-07-09)
