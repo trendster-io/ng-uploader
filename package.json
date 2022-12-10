@@ -41,7 +41,7 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "express-async-handler": "^1.1.4",
     "fs-extra": "^8.0.1",
     "helmet": "^3.18.0",
